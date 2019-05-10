@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./node_modules/jquery/dist/jquery.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			for (var i = 0; i < 10; i++) {
+				$.ajax({
+					url: 'http://localhost:8081/jsonp',
+					method: 'get',
+					dataType: 'jsonp',
+					success: function(data){
+						console.log(data);
+					}
+				})
+			}
+		})
+	</script>
+</html>

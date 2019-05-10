@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			var helloWindow = window.open('./hello.html');
+			helloWindow.onload = function(){
+				// 获取子页面 hello.html 的变量a 
+				console.log(helloWindow.a);
+				// 修改子页面 hello.html 的变量 a 的值为 100
+				helloWindow.a = 100;
+				console.log(helloWindow.a);
+			}
+			
+			var indexWindow = window.open('http://localhost:8081/');
+			// 虽然同样会返回 indexWindow 对象,但是其实是一个假对象
+			// 对于这个对象,你无法像上面的 helloWindow 对象那样绑定 onload 事件,绑定了也不起作用
+			// 如果你试图从这个对象中获取dom 元素,或者获取变量值,都会报 403 异常
+			// 既然不能绑定 onload 事件,那么我们就延迟个 3 秒再来获取 indexWindow 的变量值吧
+			setTimeout(function(){
+				console.log(indexWindow);
+				console.log(indexWindow.a);
+			}, 3000);
+		}
+	</script>
+</html>

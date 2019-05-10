@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./node_modules/axios/dist/axios.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 如果我们是直接在浏览器访问  http://localhost:8081
+		// 那么肯定可以正常访问到   index.html 页面
+		// 但是我们这里是在另一个项目下,通过 ajax 去访问 http://localhost:8081
+		// 请求是发送成功了,服务器也接收到请求,并成功响应了
+		// 但是浏览器在接收到响应的时候,一看这个响应来源跟当面的页面不同
+		// 就直接拒绝了这个响应,同时在控制台上报 404
+		axios({
+			url: 'http://localhost:8081',
+			type: 'get',
+		}).then(function(response){
+			console.log(response.data);
+		}).catch(function(error){
+			console.log(error.response.data);
+		})
+	</script>
+</html>

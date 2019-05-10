@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./node_modules/axios/dist/axios.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!-- 使用 iframe 引入了同一目录下的   ./hello.html (同源) -->
+		<iframe id="haha" src="./hello.html"></iframe>
+		<!-- 使用 iframe 引入了另外一个服务器的   index.html （不同源） -->
+		<iframe id="hehe" src="http://localhost:8081/"></iframe>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			// 获取并修改同源的 hello.html 子页面的变量 和 dom 元素 
+			var iframe = document.getElementById('haha');
+			console.log(iframe.contentWindow.a);
+			iframe.contentWindow.a = 2;
+			console.log(iframe.contentWindow.a);
+			console.log(iframe.contentWindow.document.getElementsByTagName('h2')[0].innerText);
+			iframe.contentWindow.document.getElementsByTagName('h2')[0].innerText = "你好";
+			console.log('*************************');
+			
+			// 获取 不同源的  index.html 的dom 元素就会直接报 403 异常
+			var iframe2 = document.getElementById('hehe');
+			console.log(iframe2.contentWindow.a);
+			console.log(iframe2.contentWindow.document.getElementsByTagName('h2')[0].innerText);
+		}
+	</script>
+</html>

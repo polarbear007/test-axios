@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		// 封装一个 jsonp 函数,在这里只要传入一个请求路径,就会自动生成 一个script 标签
+		// 去跨域请求
+		function jsonp(src){
+			var script = document.createElement('script');
+			script.src = src;
+			document.body.appendChild(script);
+		}
+		// 我们必须事先创建好回调函数
+		// 当我们请用 jsonp 函数创建一个script 标签去跨域请求成功
+		// 如果 callback 参数是本回调函数的函数名,而且后台支持 jsonp 请求
+		// 那么就会自动调用这个回调函数,并把后台数据封装到 data 中
+		function jsonpCallback(data){
+			console.log(data);
+		}
+		
+		// 页面加载完毕以后,我们再去后台申请
+		window.onload = function(){
+			jsonp('http://localhost:8081/jsonp?callback=jsonpCallback')
+		}
+	</script>
+</html>
